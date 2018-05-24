@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   ft_strlowcase.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atastet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/18 12:21:22 by atastet           #+#    #+#             */
-/*   Updated: 2018/05/24 12:29:31 by atastet          ###   ########.fr       */
+/*   Created: 2018/04/27 11:54:59 by atastet           #+#    #+#             */
+/*   Updated: 2018/04/27 11:55:51 by atastet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
-int		get_next_line(const int fd, char **line)
+char	*ft_strlowcase(char *str)
 {
+	unsigned int i;
 
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] >= 'A' && str[i] <= 'Z')
+			str[i] = str[i] + 32;
+		++i;
+	}
+	return (str);
 }

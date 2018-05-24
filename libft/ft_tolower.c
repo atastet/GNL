@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atastet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/18 12:21:22 by atastet           #+#    #+#             */
-/*   Updated: 2018/05/24 12:29:31 by atastet          ###   ########.fr       */
+/*   Created: 2018/04/17 10:43:21 by atastet           #+#    #+#             */
+/*   Updated: 2018/04/17 11:00:29 by atastet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
-int		get_next_line(const int fd, char **line)
+int	ft_tolower(int c)
 {
-
+	if (c >= 'A' && c <= 'Z')
+		return (c + 32);
+	else
+		return (c);
 }

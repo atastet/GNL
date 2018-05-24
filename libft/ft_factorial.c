@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   ft_factotial.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atastet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/18 12:21:22 by atastet           #+#    #+#             */
-/*   Updated: 2018/05/24 12:29:31 by atastet          ###   ########.fr       */
+/*   Created: 2018/04/27 11:57:40 by atastet           #+#    #+#             */
+/*   Updated: 2018/04/27 12:03:33 by atastet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
-int		get_next_line(const int fd, char **line)
+int	ft_factorial(int nb)
 {
-
+	if (nb < 0 || nb > 12)
+		return (0);
+	if (nb > 1)
+		return (nb * ft_factorial(nb - 1));
+	else
+		return (1);
 }

@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atastet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/18 12:21:22 by atastet           #+#    #+#             */
-/*   Updated: 2018/05/24 12:29:31 by atastet          ###   ########.fr       */
+/*   Created: 2018/04/17 16:51:49 by atastet           #+#    #+#             */
+/*   Updated: 2018/04/24 18:05:52 by atastet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
-int		get_next_line(const int fd, char **line)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
+	int		i;
 
+	i = 0;
+	while (s1[i] == s2[i] && i < (int)n && s1[i] != '\0')
+		i++;
+	if (i == (int)n)
+		return ((unsigned char)s1[i - 1] - (unsigned char)s2[i - 1]);
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

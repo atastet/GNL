@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   ft_strnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atastet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/18 12:21:22 by atastet           #+#    #+#             */
-/*   Updated: 2018/05/24 12:29:31 by atastet          ###   ########.fr       */
+/*   Created: 2018/04/20 15:20:41 by atastet           #+#    #+#             */
+/*   Updated: 2018/04/20 15:44:36 by atastet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
-int		get_next_line(const int fd, char **line)
+char	*ft_strnew(size_t size)
 {
+	char *ptr;
 
+	if ((ptr = (char*)malloc(sizeof(*ptr) * size + 1)) == NULL)
+		return (NULL);
+	ft_memset((void*)ptr, '\0', size + 1);
+	return ((char *)ptr);
 }

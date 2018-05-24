@@ -1,18 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   ft_strmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atastet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/18 12:21:22 by atastet           #+#    #+#             */
-/*   Updated: 2018/05/24 12:29:31 by atastet          ###   ########.fr       */
+/*   Created: 2018/04/24 16:13:34 by atastet           #+#    #+#             */
+/*   Updated: 2018/04/24 16:28:18 by atastet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
-int		get_next_line(const int fd, char **line)
+char	*ft_strmap(char const *s, char (*f)(char))
 {
+	int		i;
+	size_t	len;
+	char	*map;
 
+	if (s == NULL || f == NULL)
+		return (NULL);
+	i = 0;
+	len = ft_strlen(s);
+	if ((map = (char*)malloc(sizeof(*map) * (len + 1))) == NULL)
+		return (NULL);
+	while (s[i])
+	{
+		map[i] = (*f)((char)s[i]);
+		i++;
+	}
+	map[i] = '\0';
+	return (map);
 }
