@@ -6,12 +6,14 @@
 /*   By: atastet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 11:02:22 by atastet           #+#    #+#             */
-/*   Updated: 2018/05/24 16:27:04 by atastet          ###   ########.fr       */
+/*   Updated: 2018/05/24 17:10:31 by atastet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
+
+# define BUFF_SIZE 6
 
 # include "libft/libft.h"
 # include <stdlib.h>
@@ -21,7 +23,6 @@
 # include <unistd.h>
 # include <fcntl.h>
 
-# define BUF_SIZE 42
 
 typedef struct		s_lst
 {
