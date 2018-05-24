@@ -6,7 +6,7 @@
 /*   By: atastet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 11:02:22 by atastet           #+#    #+#             */
-/*   Updated: 2018/05/24 15:33:39 by atastet          ###   ########.fr       */
+/*   Updated: 2018/05/24 16:27:04 by atastet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 
-# define BUF_SIZE 32
+# define BUF_SIZE 42
 
 typedef struct		s_lst
 {

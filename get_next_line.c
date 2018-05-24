@@ -6,11 +6,12 @@
 /*   By: atastet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 12:21:22 by atastet           #+#    #+#             */
-/*   Updated: 2018/05/24 15:33:37 by atastet          ###   ########.fr       */
+/*   Updated: 2018/05/24 16:28:01 by atastet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
 static char		*write_line(t_lst *tmp)
 {
@@ -20,16 +21,19 @@ static char		*write_line(t_lst *tmp)
 	int		ret;
 	
 	i = 0;
-	while ((ret = (read(tmp->fd, buf, BUF_SIZE)) > 0) &&
-		ft_strchr(tmp->txt, '\n') == NULL)
+	dprintf(1, "W1\n");
+	while ((ret = (read(tmp->fd, buf, BUF_SIZE)) > 0) && (ft_strchr(tmp->txt, '\n') == NULL))
 	{
 		buf[ret] = '\0';
+		dprintf(1, "W2\n");
 		tmp_rd = tmp->txt;
 		tmp->txt = ft_strjoin(tmp_rd, buf);
 		free(tmp_rd);
 	}
+	dprintf(1, "W3\n");
 	if (ret < 0)
 		return (NULL);
+	dprintf(1, "W4\n");
 	return (tmp->txt);
 }
 
@@ -71,7 +75,9 @@ int				get_next_line(const int fd, char **line)
 		if ((tmp = fd_new(fd, &lst)) == NULL)
 			return (-1);
 	}
+	dprintf(1, "t4\n");
 	if ((*line = write_line(tmp)) == NULL)
 		return (-1);
+	dprintf(1, "t5\n");
 	return (0);
 }
