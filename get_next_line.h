@@ -6,7 +6,7 @@
 /*   By: atastet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 11:02:22 by atastet           #+#    #+#             */
-/*   Updated: 2018/05/24 17:10:31 by atastet          ###   ########.fr       */
+/*   Updated: 2018/05/29 16:38:50 by atastet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include <sys/stat.h>
 # include <unistd.h>
 # include <fcntl.h>
-
 
 typedef struct		s_lst
 {
