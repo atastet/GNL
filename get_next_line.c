@@ -6,7 +6,7 @@
 /*   By: atastet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 12:21:22 by atastet           #+#    #+#             */
-/*   Updated: 2018/05/29 18:22:10 by atastet          ###   ########.fr       */
+/*   Updated: 2018/05/29 19:03:32 by atastet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #include <stdio.h>
 
 /*
-** Read BUF_SiZE and Chekc if there is a \n o \0 inside, if not it continues 
-** reading. If a \n is found the i first cararcters are copied to new line 
+** Read BUF_SiZE and Chekc if there is a \n o \0 inside, if not it continues
+** reading. If a \n is found the i first cararcters are copied to new line.
 ** and return;
 */
 
@@ -53,8 +53,8 @@ static char			*get_line(t_lst *lst)
 
 static t_lst		*fd_new(t_lst **lst, int fd)
 {
-	t_lst *new;
-	t_lst *tmp;
+	t_lst	*new;
+	t_lst	*tmp;
 
 	tmp = (*lst);
 	if (fd < 0)
@@ -73,8 +73,7 @@ static t_lst		*fd_new(t_lst **lst, int fd)
 	return (new);
 }
 
-
-int				get_next_line(int fd, char **line)
+int					get_next_line(int fd, char **line)
 {
 	static t_lst	*lst = NULL;
 	t_lst			*tmp;
@@ -94,5 +93,6 @@ int				get_next_line(int fd, char **line)
 		return (0);
 	tmp_txt = tmp->txt;
 	tmp->txt = ft_strsub(tmp_txt, (ft_strlen(*line) + 1), ft_strlen(tmp->txt));
+	free(tmp_txt);
 	return (1);
 }
