@@ -6,34 +6,18 @@
 /*   By: atastet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 12:21:22 by atastet           #+#    #+#             */
-/*   Updated: 2018/05/29 17:20:14 by atastet          ###   ########.fr       */
+/*   Updated: 2018/05/29 18:22:10 by atastet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
 
-static void			free_lst(t_lst **lst, t_lst *tmp)
-{
-	t_lst	*start;
-	t_lst	*nxt;
-
-	start = (*lst);
-	nxt = tmp->next;
-	if ((*lst) == tmp)
-		(*lst) = (*lst)->next;
-	else
-	{
-		while (start && start->next != tmp)
-			start = start->next;
-		if (nxt == NULL)
-			start->next = NULL;
-		else 
-			start->next = nxt;
-	}
-	free(tmp->txt);
-	free(tmp);
-}
+/*
+** Read BUF_SiZE and Chekc if there is a \n o \0 inside, if not it continues 
+** reading. If a \n is found the i first cararcters are copied to new line 
+** and return;
+*/
 
 static char			*get_line(t_lst *lst)
 {
@@ -63,7 +47,11 @@ static char			*get_line(t_lst *lst)
 	return (new_line);
 }
 
-static t_lst	*fd_new(t_lst **lst, int fd)
+/*
+** Creates a new link in the lst if another fd is open;
+*/
+
+static t_lst		*fd_new(t_lst **lst, int fd)
 {
 	t_lst *new;
 	t_lst *tmp;
@@ -85,6 +73,7 @@ static t_lst	*fd_new(t_lst **lst, int fd)
 	return (new);
 }
 
+
 int				get_next_line(int fd, char **line)
 {
 	static t_lst	*lst = NULL;
@@ -102,12 +91,8 @@ int				get_next_line(int fd, char **line)
 	if (!(line) || (*line = get_line(tmp)) == NULL)
 		return (-1);
 	if (!(ft_strcmp(tmp->txt, "\0")))
-	{
-		free_lst(&lst, tmp);
 		return (0);
-	}
 	tmp_txt = tmp->txt;
 	tmp->txt = ft_strsub(tmp_txt, (ft_strlen(*line) + 1), ft_strlen(tmp->txt));
-	free(tmp_txt);
 	return (1);
 }
