@@ -6,7 +6,7 @@
 /*   By: atastet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 12:21:22 by atastet           #+#    #+#             */
-/*   Updated: 2018/05/31 11:05:18 by atastet          ###   ########.fr       */
+/*   Updated: 2018/05/31 13:35:27 by atastet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 ** and return;
 */
 
-static char			*get_line(t_lst *lst)
+static char			*extract_line(t_lst *lst)
 {
 	int		i;
 	char	*new_line;
@@ -87,7 +87,7 @@ int					get_next_line(int fd, char **line)
 		if ((tmp = fd_new(&lst, fd)) == NULL)
 			return (-1);
 	}
-	if (!(line) || (*line = get_line(tmp)) == NULL)
+	if (!(line) || (*line = extract_line(tmp)) == NULL)
 		return (-1);
 	if (!(ft_strcmp(tmp->txt, "\0")))
 		return (0);
