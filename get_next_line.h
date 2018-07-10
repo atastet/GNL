@@ -5,23 +5,22 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: atastet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/24 11:02:22 by atastet           #+#    #+#             */
-/*   Updated: 2018/05/31 11:09:48 by atastet          ###   ########.fr       */
+/*   Created: 2018/06/10 19:41:15 by atastet           #+#    #+#             */
+/*   Updated: 2018/07/10 09:50:40 by atastet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
+# define BUFF_SIZE 6
 
-# define BUFF_SIZE 4096
-
-# include "libft/libft.h"
+# include <unistd.h>
 # include <stdlib.h>
-# include <string.h>
 # include <sys/types.h>
 # include <sys/stat.h>
-# include <unistd.h>
 # include <fcntl.h>
+# include "libft/libft.h"
+# include <string.h>
 
 typedef struct		s_lst
 {
@@ -31,5 +30,4 @@ typedef struct		s_lst
 }					t_lst;
 
 int					get_next_line(const int fd, char **line);
-
 #endif

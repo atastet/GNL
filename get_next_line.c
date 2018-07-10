@@ -5,53 +5,66 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: atastet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/18 12:21:22 by atastet           #+#    #+#             */
-/*   Updated: 2018/05/31 13:49:09 by atastet          ###   ########.fr       */
+/*   Created: 2018/06/09 19:41:03 by atastet           #+#    #+#             */
+/*   Updated: 2018/07/10 09:50:15 by atastet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
 
-/*
-** Read BUF_SiZE and Chekc if there is a \n o \0 inside, if not it continues
-** reading. If a \n is found the i first cararcters are copied to new line.
-** and return;
-*/
+void			free_tmp(t_lst **lst, t_lst *tmp)
+{
+	t_lst	*bef;
+	t_lst	*nxt;
 
-static char			*extract_line(t_lst *lst)
+	bef = (*lst);
+	nxt = tmp->next;
+	if ((*lst) == tmp)
+		(*lst) = (*lst)->next;
+	else
+	{
+		while (bef && bef->next != tmp)
+			bef = bef->next;
+		if (nxt == NULL)
+			bef->next = NULL;
+		else
+			bef->next = nxt;
+	}
+	free(tmp->txt);
+	free(tmp);
+}
+
+static char		*get_line(t_lst *tmp)
 {
 	int		i;
-	char	*new_line;
+	char	*new;
 	char	buff[BUFF_SIZE + 1];
 	int		ret;
 	char	*tmptxt;
 
 	i = 0;
-	while (ft_strchr(lst->txt, '\n') == NULL &&
-			(ret = read(lst->fd, buff, BUFF_SIZE)) > 0)
+	while (ft_strchr(tmp->txt, '\n') == NULL &&
+			(ret = read(tmp->fd, buff, BUFF_SIZE)) > 0)
 	{
 		buff[ret] = '\0';
-		tmptxt = lst->txt;
-		lst->txt = ft_strjoin(tmptxt, buff);
+		tmptxt = tmp->txt;
+		tmp->txt = ft_strjoin(tmptxt, buff);
 		free(tmptxt);
 	}
 	if (ret == -1)
 		return (NULL);
-	while (lst->txt[i] != '\n' && lst->txt[i] != '\0')
+	while (tmp->txt && tmp->txt[i] != '\n' && tmp->txt[i] != '\0')
 		i++;
-	if ((new_line = (char *)malloc(sizeof(char) * (i + 1))) == NULL)
+	if ((new = (char *)malloc(sizeof(char) * (i + 1))) == NULL)
 		return (NULL);
-	new_line = ft_strncpy(new_line, lst->txt, (size_t)i);
-	new_line[i] = '\0';
-	return (new_line);
+	if (tmp->txt)
+		new = ft_strncpy(new, tmp->txt, (size_t)i);
+	new[i] = '\0';
+	return (new);
 }
 
-/*
-** Creates a new link in the lst if another fd is open;
-*/
-
-static t_lst		*fd_new(t_lst **lst, int fd)
+static t_lst	*new_fd(int fd, t_lst **lst)
 {
 	t_lst	*new;
 	t_lst	*tmp;
@@ -61,11 +74,11 @@ static t_lst		*fd_new(t_lst **lst, int fd)
 		return (NULL);
 	while (tmp && tmp->next != NULL)
 		tmp = tmp->next;
-	if ((new = (t_lst *)malloc(sizeof(t_lst))) == NULL)
+	if ((new = (t_lst *)malloc(sizeof(t_list))) == NULL)
 		return (NULL);
-	new->fd = fd;
-	new->txt = NULL;
 	new->next = NULL;
+	new->txt = NULL;
+	new->fd = fd;
 	if ((*lst) == NULL)
 		(*lst) = new;
 	else
@@ -73,26 +86,29 @@ static t_lst		*fd_new(t_lst **lst, int fd)
 	return (new);
 }
 
-int					get_next_line(int fd, char **line)
+int				get_next_line(int fd, char **line)
 {
 	static t_lst	*lst = NULL;
 	t_lst			*tmp;
-	char			*tmp_txt;
+	char			*tmptxt;
 
 	tmp = lst;
 	while (tmp && tmp->fd != fd)
 		tmp = tmp->next;
 	if (tmp == NULL)
 	{
-		if ((tmp = fd_new(&lst, fd)) == NULL)
+		if ((tmp = new_fd(fd, &lst)) == NULL)
 			return (-1);
 	}
-	if (!(line) || (*line = extract_line(tmp)) == NULL)
+	if (!(line) || (*line = get_line(tmp)) == NULL)
 		return (-1);
-	if (!(ft_strcmp(tmp->txt, "\0")))
+	if (!(tmp->txt) || !(ft_strcmp(tmp->txt, "\0")))
+	{
+		free_tmp(&lst, tmp);
 		return (0);
-	tmp_txt = tmp->txt;
-	tmp->txt = ft_strsub(tmp_txt, (ft_strlen(*line) + 1), ft_strlen(tmp->txt));
-	free(tmp_txt);
+	}
+	tmptxt = tmp->txt;
+	tmp->txt = ft_strsub(tmptxt, (ft_strlen(*line) + 1), ft_strlen(tmp->txt));
+	free(tmptxt);
 	return (1);
 }

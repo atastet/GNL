@@ -11,16 +11,16 @@ OBJS 		= 	$(SRC:.c=.o)
 
 CC = gcc
 
-CFLAGS=		-Wall -Wextra -Werror -g3 -fsanitize=address  -I libft/
+CFLAGS=		-Wall -Wextra -Werror -I libft/
 
 all : $(NAME)
 
 $(NAME) : $(OBJS)
 	make -C libft
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -L libft -lft
+	$(CC) $(CFLAGS) $(OBJS) -o  $(NAME) -L libft -lft
 
 $(OBJS) : get_next_line.h
-	$(CC) $(CFLAGS) -c $(SRC_POS)
+	$(CC) $(CFLAGS) -c -g3 $(SRC_POS)
 
 %.o: %.c
 	$(CC) -o $@ -c $< $(CFLAGS)
